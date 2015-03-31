@@ -4,6 +4,6 @@ Version: 0.1.0
 Authors@R: person("Fiorella", "Schischlik", , "fiorella.schischlik@gmail.com", role = c("aut", "cre"))
 Description: The following packages uses as input frequencies of clones derived from colony-picking experiments or estimates of clone size from variant frequency of NGS sequencing experiments and draws accordingly polygons that represent the evolution of the clones
 Depends: R (>= 3.1.3)
-Suggests: ggplot2, grid
+Imports: ggplot2, grid
 License: Artistic-2.0
 LazyData: true
