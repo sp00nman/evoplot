@@ -45,6 +45,6 @@ df <- data.frame(clone=c(1,1,2),
 ```
 
 ``` r
-df_freq <- calculate.frequencies(df)
+df_freq$subcone_freq <- calculate.frequencies(df)
 ```
 
