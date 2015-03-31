@@ -3,8 +3,7 @@
 #'@param clones A dataframe with a column counts that contains the counts for 
 #'each mutation in a clone \code{clones}
 #'
-#'@return clones Adds a column frequency to the dataframe with the corresponding 
-#'frequencies for each mutation
+#'@return clones Returns vector with frequencies
 #'
 #'@keywords frequency clone
 #'
@@ -13,8 +12,7 @@
 #'@examples
 #'clones <- calculate.frequencies(clones)
 
-calculate.frequencies <- function(clones){
-  frequency <- clones$counts*(100/(sum(clones$counts)))
-  clones$frequency <- frequency
-  return(clones)
+calculate.frequencies <- function(df){
+  frequency <- df$colony_count*(100/(sum(df$colony_count)))
+  return(frequency)
 }
