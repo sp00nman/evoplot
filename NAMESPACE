@@ -3,5 +3,6 @@
 export(calculate.alpha.beta.coordinates)
 export(calculate.frequencies)
 export(calculate.gamma.coordinates)
-export(calculate.xaxis.length.clones)
+export(calculate.yaxis.length.clones)
 export(draw.clonal.evolution.plot)
+export(get_coordinates)
