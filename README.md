@@ -36,6 +36,7 @@ library(evoplot)
 
 ``` r
 # basic example
+# create dataframe with colony counts for each subclone
 df <- data.frame(clone=c(1,1,2),
                  subclone=c("A","B","C"),
                  colony_count=c(46,43,1),
@@ -45,6 +46,29 @@ df <- data.frame(clone=c(1,1,2),
 ```
 
 ``` r
-df_freq$subcone_freq <- calculate.frequencies(df)
+# if necessary, calculate frequencies
+df$subcone_freq <- calculate.frequencies(df)
 ```
+
+``` r
+# calculate coordinates to plot polygons
+d_plot <- get_coordinates(df, yaxis_length=4, debug=TRUE)
+```
+
+``` r
+#draw plot
+g_plot <- draw.clonal.evolution.plot(d_plot)
+print(g_plot)
+```
+
+``` r
+# save plot to pdf
+pdf(paste(path2file, "evoplot.pdf", sep ="/"), 
+    width=5, height=5, useDingbats=FALSE)
+print(g_plot)
+dev.off()
+```
+
+![overlapping](https://github.com/sp00nman/evoplot/blob/master/pics/evoplot.png?raw=true 50x100)
+
 
