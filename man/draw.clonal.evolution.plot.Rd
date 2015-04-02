@@ -4,7 +4,7 @@
 \alias{draw.clonal.evolution.plot}
 \title{Draw the polygone given as input the coordinates}
 \usage{
-draw.clonal.evolution.plot(d)
+draw.clonal.evolution.plot(d_plot)
 }
 \arguments{
 \item{d}{dataframe with coordinates \code{d}}

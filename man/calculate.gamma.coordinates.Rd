@@ -5,7 +5,7 @@
 \title{Calculate gamma coordinates to draw the polygons}
 \usage{
 calculate.gamma.coordinates(freq_clones, xaxis_length, yaxis_length,
-  xy_start = c(0, 0))
+  xy_start = c(0, 0), debug = FALSE)
 }
 \arguments{
 \item{freq_clones}{A vector with the frequency of the clones \code{freq_clones}}
@@ -17,7 +17,7 @@ calculate.gamma.coordinates(freq_clones, xaxis_length, yaxis_length,
 \item{xy_start}{Coordinates for the starting point of the plot \code{xy_start}}
 }
 \value{
-list Returns a list with x and y coordinates
+dataframe Returns a dataframe with x and y coordinates for point gamma
 }
 \description{
 (beta)
@@ -29,10 +29,13 @@ list Returns a list with x and y coordinates
              (alpha)
 }
 \examples{
-gamma_coordinates_s <- calculate.gamma.coordinates(freq_clones[freq_clones$independent==2, ],
-xaxis_length=4,
-yaxis_length=yaxis_length_per_clone[2],
-xy_start=c(0,yaxis_length_per_clone[1])
+alpha_beta <- calculate.alpha.beta.coordinates(df[df$clone==1, ],
+                                              xaxis_length=4,
+                                              yaxis_length=yaxis_length_per_clone[1],
+                                              xy_start=c(0,0))
 }
+\keyword{alpha}
+\keyword{beta}
 \keyword{coordinates}
+\keyword{gamma}
 

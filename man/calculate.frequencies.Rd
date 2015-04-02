@@ -4,15 +4,14 @@
 \alias{calculate.frequencies}
 \title{Calculates clone size frequencies if clone counts are given as input}
 \usage{
-calculate.frequencies(clones)
+calculate.frequencies(df)
 }
 \arguments{
 \item{clones}{A dataframe with a column counts that contains the counts for
 each mutation in a clone \code{clones}}
 }
 \value{
-clones Adds a column frequency to the dataframe with the corresponding
-frequencies for each mutation
+clones Returns vector with frequencies
 }
 \description{
 Calculates clone size frequencies if clone counts are given as input
