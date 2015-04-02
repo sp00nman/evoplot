@@ -13,21 +13,21 @@
 #'@param yaxis_length Length of the y-axis \code{yaxis_length}
 #'@param xy_start Coordinates for the starting point of the plot \code{xy_start}
 #'
-#'@return list Returns a list with x and y coordinates
+#'@return dataframe Returns a dataframe with x and y coordinates for point gamma
 #'
 #'@keywords coordinates gamma alpha beta
 #'
 #'@export
 #'
 #'@examples
-#'alpha_beta <- calculate.alpha.beta.coordinates(df_freq[df_freq$clone==1, ],
+#'alpha_beta <- calculate.alpha.beta.coordinates(df[df$clone==1, ],
 #'                                               xaxis_length=4,
 #'                                               yaxis_length=yaxis_length_per_clone[1],
 #'                                               xy_start=c(0,0))
 calculate.gamma.coordinates <- function(freq_clones, xaxis_length, 
                                         yaxis_length, xy_start=c(0,0),
                                         debug=FALSE) {
-  offset <- xy_start[2] #where to place the polygon
+  offset <- xy_start[2] #length of the clone
   y_coord <- (yaxis_length/2)+offset
   num_clones <- length(freq_clones$clone)
   
@@ -56,13 +56,13 @@ calculate.gamma.coordinates <- function(freq_clones, xaxis_length,
       if (debug) {print(c("j: ", j))}
       if (debug) {print(c("x[j]: ", x[j]))}
       
-      x <- append(x, x[j]+dis_points)
+      x <- cbind(x, x[j]+dis_points)
       j=j+1
       
       if (debug) {print(c("x", x))}
     }
   }
-  return(list(x=x, y=y))
+  return(data.frame(x=as.vector(x), y=as.vector(y)))
 }
 
 #' Calculate alpha & beta coordinates to draw the polygons
@@ -80,7 +80,7 @@ calculate.gamma.coordinates <- function(freq_clones, xaxis_length,
 #'@param yaxis_length Length of the y-axis \code{yaxis_length}
 #'@param xy_start Coordinates for the starting point of the plot \code{xy_start}
 #'
-#'@return list Returns a list with x and y coordinates for alpha & beta
+#'@return dataframe Returns a dataframe with x and y coordinates for alpha & beta
 #'
 #'@keywords coordinates alpha beta
 #'
@@ -96,45 +96,49 @@ calculate.alpha.beta.coordinates <- function(freq_clones, xaxis_length,
                                              yaxis_length, xy_start=c(0,0),
                                              debug=FALSE){
   offset <- xy_start[2] #where to place the polygon
-  y_coord=(yaxis_length/2)+offset
+  y_coord <- (yaxis_length/2)+offset
   nr_clones <- length(freq_clones$clone)
   
   if (debug) {print(c("offset: ", offset))}
+  if (debug) {print(c("yaxis_length: ", yaxis_length))}
   if (debug) {print(c("y_coord: ", y_coord))}
   if (debug) {print(c("number of clones: ", nr_clones))}
   if (debug) {print(c("freq_length: ", xaxis_length))}
   
-  x <- rep(xaxis_length,nr_clones*2)
+  x <- rep(xaxis_length, nr_clones)
   
   if (debug) {print(c("x:", x))}
   
   y_alpha <- c()
-  y_alpha_a <- 0
+  y_alpha_a <- c()
   y_beta <- c()
-  y_beta_a <- 0
+  y_beta_a <- c()
+  rel_dis <- c()
   prev_rel_dis <- 0
-  j=1
-  for (i in 1:length(freq_clones$clone)){
-    if (debug) {print(c("j: ", j))}
+  rel_clones <- c()
+
+  for (i in 1:nr_clones){
+    if (debug) {print(c("i: ", i))}
     
-    rev_clones <- rev(as.character(freq_clones$clone)) #order C-->B-->A
-    rel_dis <-(xaxis_length*freq_clones[freq_clones$clone==rev_clones[j], ]$frequency)/100
-    prev_rel_dis <- cbind(prev_rel_dis, rel_dis)
+    rev_clones <- rev(as.character(freq_clones$subclone)) #order C-->B-->A
+    rel_dis <- cbind(rel_dis, ((xaxis_length*freq_clones[freq_clones$subclone==rev_clones[i], ]$subclone_freq)/100))
     
+    if (debug) {print(c("subclone: ", rev_clones[i]))}
     if (debug) {print(c("rel_dis: ", rel_dis))}
-    if (debug) {print(c("prev_rel_dis[j]: ", prev_rel_dis[j]))}
-    if (debug) {print(c("y_alpha_a before", y_alpha_a))}
-    if (debug) {print(c("y_beta_a before", y_beta_a))}
+    if (debug) {print(c("prev_rel_dis:", prev_rel_dis))}
     
-    y_alpha_a <- y_coord-((rel_dis/2)+(prev_rel_dis[j]/2))
-    y_alpha <- cbind(y_alpha, y_alpha_a)
-    y_beta_a <- y_coord+((rel_dis/2)+(prev_rel_dis[j]/2))
-    y_beta <- cbind(y_beta, y_beta_a)
+    y_alpha <- cbind(y_alpha, y_coord - ((rel_dis[i]/2)  + (prev_rel_dis/2)))
+    y_beta <- cbind(y_beta, y_coord + ((rel_dis[i]/2) + (prev_rel_dis/2)))
+    y_alpha <- rev(y_alpha)
+    y_beta <- rev(y_beta)
+    
+    prev_rel_dis <- rel_dis[i]
     
     if (debug) {print(c("y_alpha:", y_alpha))}
     if (debug) {print(c("y_beta:", y_beta))}
-    
-    j=j+1
-  } 
-  return(list(x=x, y_alpha=y_alpha, y_beta=y_beta))
+  }
+  
+  return(data.frame(x=as.vector(x), 
+                    y_alpha=as.vector(y_alpha), 
+                    y_beta=as.vector(y_beta)))
 }
