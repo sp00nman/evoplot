@@ -39,7 +39,7 @@ library(evoplot)
 # create dataframe with colony counts for each subclone
 df <- data.frame(clone=c(1,1,2),
                  subclone=c("A","B","C"),
-                 colony_count=c(46,43,1),
+                 colony_count=c(25,15,10),
                  gene=c("GENE.A,GENE.B,GENE.C",
                      "GENE.A,GENE.B,GENE.C,GENE.D",
                      "GENE.E")) 
