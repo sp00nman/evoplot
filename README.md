@@ -1,7 +1,12 @@
 evoplot
 -------
 
-evoplot is an R package that draws clonal evolution plots based on clonal size counts or frequencies
+evoplot is an R package that draws clonal evolution plots based on clonal size counts or clone frequencies
+
+It uses ggplot2 to draw polygons for each subclone and returns a ggplot2 object.
+
+evoplot has been used to plot clonal hierarchies derived from the analysis of hematopoietic progenitor colonies for the publication [Somatic Mutations of Calreticulin in Myeloproliferative Neoplasms, Kampfl et al., NEJM 2013](http://www.nejm.org/action/showImage?doi=10.1056%2FNEJMoa1311347&iid=f03)
+
 
 --------------------------------------------------------------------------------
 
