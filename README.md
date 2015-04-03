@@ -39,6 +39,14 @@ library(evoplot)
 ?evoplot
 ```
 
+Evoplot requires input data with the following format:
+
+| clone    | subclone |  colony_count  | gene                         | 
+| :------- |:---------|:---------------|:-----------------------------|
+| 1        | A        | 25             | GENE.A,GENE.B,GENE.C         |
+| 1        | B        | 15             | GENE.A,GENE.B,GENE.C,GENE.D  |
+| 2        | C        | 10             | GENE.E                       |
+
 ``` r
 # basic example
 # create dataframe with colony counts for each subclone
