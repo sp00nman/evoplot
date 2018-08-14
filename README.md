@@ -82,6 +82,6 @@ print(g_plot)
 dev.off()
 ```
 
-![overlapping](https://github.com/sp00nman/evoplot/blob/master/pics/evoplot.png?raw=true 50x100)
+<img src="https://github.com/sp00nman/evoplot/blob/master/pics/evoplot.png" alt="grouping" width="500" height="500">
 
 
